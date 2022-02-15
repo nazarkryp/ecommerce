@@ -1,0 +1,25 @@
+.root-container {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 75px;
+}
+
+.root-main {
+    display: flex;
+    box-sizing: border-box;
+    place-content: start center;
+}
+
+.root-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    place-content: center center;
+    align-items: center;
+}
+
+.root-footer>.container {
+    padding: 2rem 0;
+}

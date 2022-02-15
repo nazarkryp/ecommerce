@@ -1,0 +1,27 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    color: rgba(0, 0, 0, 0.87);
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.container-wrapper {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+}
+
+.container {
+    width: 1200px;
+}
+
+.container.flex-row {
+    display: flex;
+    flex-direction: row;
+    place-content: center start;
+    align-items: center;
+}

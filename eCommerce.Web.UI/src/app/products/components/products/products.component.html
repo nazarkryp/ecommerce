@@ -1,0 +1,26 @@
+<div>
+    <h2><strong>Nова колекція <s>нахуй</s></strong></h2>
+</div>
+
+<div class="grid">
+    <div class="grid-item" *ngFor="let product of products">
+        <figure>
+            <div matRipple style="position: relative; margin-bottom: .625rem;">
+                <a [routerLink]="['100500', 'checkout']">
+                    <img src="https://cdn.shopify.com/s/files/1/0332/6420/5963/products/eberj4183019d5e_q1_2-0_540x.jpg?v=1606136069"
+                        alt="">
+                </a>
+            </div>
+            <figcaption>
+                <a>
+                    Якась там пиздата шмотка
+                </a>
+            </figcaption>
+            <figcaption>
+                <a style="font-weight: 600; color: rgba(0, 0, 0, .5);">
+                    $100500.00
+                </a>
+            </figcaption>
+        </figure>
+    </div>
+</div>

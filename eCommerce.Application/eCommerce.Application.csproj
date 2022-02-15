@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Orders\Queries\" />
+    <Folder Include="Products\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.3.6" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.6" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\eCommerce.Domain\eCommerce.Domain.csproj" />
+    <ProjectReference Include="..\eCommerce.Payments.WayForPay\eCommerce.Payments.WayForPay.csproj" />
+    <ProjectReference Include="..\eCommerce.Persistence\eCommerce.Persistence.csproj" />
+    <ProjectReference Include="..\eCommerce.Request.Dtos\eCommerce.Request.Dtos.csproj" />
+  </ItemGroup>
+
+</Project>
