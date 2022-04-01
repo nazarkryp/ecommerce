@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
+using eCommerce.Application.Exceptions;
 using eCommerce.Application.ShoppingCarts.Commands;
-using eCommerce.Domain.ShoppingCarts;
 using eCommerce.Persistence;
 
 using MediatR;
@@ -25,20 +24,19 @@ namespace eCommerce.Application.ShoppingCarts.Handlers
         {
             var shoppingCart = await _shoppingCartRepository.GetShoppingCartAsync(request.ShoppingCartId);
 
+            if (shoppingCart == null)
+            {
+                throw new ShoppingCartNotFoundException(request.ShoppingCartId);
+            }
+
             var product = await _productRepository.GetProductAsync(request.ProductId);
 
             if (product == null)
             {
-                throw new Exception("Product not found");
+                throw new ProductNotFoundException(request.ProductId);
             }
 
-            shoppingCart.AddItem(new ShoppingCartItem
-            {
-                Id = Guid.NewGuid(),
-                Name = product.Name,
-                Price = product.Price,
-                ProductId = request.ProductId,
-            });
+            shoppingCart.AddItem(product);
 
             await _shoppingCartRepository.SaveShoppingCart(shoppingCart);
 

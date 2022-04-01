@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
+using eCommerce.Application.Exceptions;
 using eCommerce.Application.Infrastructure.Mapping;
 using eCommerce.Application.ShoppingCarts.Queries;
 using eCommerce.Persistence;
@@ -22,6 +23,11 @@ namespace eCommerce.Application.ShoppingCarts.Handlers
         public async Task<ShoppingCartResponse> Handle(GetShoppingCartQuery request, CancellationToken cancellationToken)
         {
             var shoppingCart = await _shoppingCartRepository.GetShoppingCartAsync(request.ShoppingCartId);
+            
+            if (shoppingCart == null)
+            {
+                throw new ShoppingCartNotFoundException(request.ShoppingCartId);
+            }
 
             return shoppingCart.Map();
         }

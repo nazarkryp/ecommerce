@@ -2,6 +2,7 @@
 
 using eCommerce.Application.Payments.Commands;
 using eCommerce.Application.Payments.Queries;
+using eCommerce.Request.Dtos.Payments;
 
 using MediatR;
 
@@ -21,23 +22,19 @@ public class PaymentsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreatePaymentAsync(string orderId)
+    public async Task<IActionResult> CreatePaymentAsync(CreatePaymentRequest request)
     {
-        var command = CreatePaymentCommand.Create(orderId);
+        var command = CreatePaymentCommand.Create(
+            request.OrderId,
+            request.FirstName,
+            request.LastName,
+            request.EmailAddress,
+            request.PhoneNumber);
 
         var response = await _sender.Send(command);
 
         return Ok(response);
     }
-
-    //[HttpGet("{orderReference}")]
-    //public async Task<IActionResult> GetPaymentStatusAsync(string orderReference)
-    //{
-    //    WayForPayProvider _paymentProvider = new WayForPayProvider();
-    //    var status = await _paymentProvider.GetPaymentAsync(orderReference);
-
-    //    return Ok(status);
-    //}
 
     [HttpGet("{orderId}")]
     public async Task<IActionResult> GetPaymentStatusAsync(string orderId)
@@ -48,10 +45,4 @@ public class PaymentsController : ControllerBase
 
         return Ok(response);
     }
-
-    //[HttpPost]
-    //public async Task<IActionResult> CompletePaymentAsync()
-    //{
-    //    return Ok();
-    //}
 }

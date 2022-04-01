@@ -1,26 +1,35 @@
-<div>
-    <h2><strong>Nова колекція <s>нахуй</s></strong></h2>
-</div>
+<div style="display: flex; flex-direction: row;">
+    <div style="max-width: 300px; width: 100%;">
+        <app-categories></app-categories>
+    </div>
 
-<div class="grid">
-    <div class="grid-item" *ngFor="let product of products">
-        <figure>
-            <div matRipple style="position: relative; margin-bottom: .625rem;">
-                <a [routerLink]="['100500', 'checkout']">
-                    <img src="https://cdn.shopify.com/s/files/1/0332/6420/5963/products/eberj4183019d5e_q1_2-0_540x.jpg?v=1606136069"
-                        alt="">
-                </a>
+    <div style="width: 100%; box-sizing: border-box;">
+        <header>
+            <h2><strong>Nова колекція <s>нахуй</s></strong></h2>
+        </header>
+        <div class="grid">
+            <div class="grid-item" *ngFor="let product of collectionResponse?.items">
+                <figure>
+                    <div matRipple style="position: relative; margin-bottom: .625rem;">
+                        <a [routerLink]="['100500', 'checkout']">
+                            <img [src]="product.imageUri" style="width: 100%; height: 275px; object-fit: cover;">
+                        </a>
+                    </div>
+                    <figcaption>
+                        <a>
+                            {{product.name}}
+                        </a>
+                        <button mat-icon-button (click)="addToShoppingCart(product.id)">
+                            <mat-icon>add_shopping_cart</mat-icon>
+                        </button>
+                    </figcaption>
+                    <figcaption>
+                        <a style="font-weight: 600; color: rgba(0, 0, 0, .5);">
+                            {{product.price | currency}}
+                        </a>
+                    </figcaption>
+                </figure>
             </div>
-            <figcaption>
-                <a>
-                    Якась там пиздата шмотка
-                </a>
-            </figcaption>
-            <figcaption>
-                <a style="font-weight: 600; color: rgba(0, 0, 0, .5);">
-                    $100500.00
-                </a>
-            </figcaption>
-        </figure>
+        </div>
     </div>
 </div>

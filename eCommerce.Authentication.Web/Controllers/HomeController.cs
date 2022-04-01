@@ -1,7 +1,9 @@
 using eCommerce.Authentication.Web.Infrastructure;
+using eCommerce.Authentication.Web.Models;
+
 using IdentityServer4.Services;
 
-using IdentityServerHost.Quickstart.UI;
+//using IdentityServerHost.Quickstart.UI;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

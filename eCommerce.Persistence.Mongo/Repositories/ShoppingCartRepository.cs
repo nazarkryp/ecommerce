@@ -10,18 +10,18 @@ namespace eCommerce.Persistence.Mongo.Repositories
 {
     internal class ShoppingCartRepository : IShoppingCartRepository
     {
-        private static readonly Dictionary<Guid, List<IEvent>> Events = new Dictionary<Guid, List<IEvent>>();
+        private static readonly Dictionary<Guid, List<Event>> Events = new Dictionary<Guid, List<Event>>();
 
-        public Task<ShoppingCart> GetShoppingCartAsync(Guid shoppingCartId)
+        public Task<ShoppingCart?> GetShoppingCartAsync(Guid shoppingCartId)
         {
             if (!Events.TryGetValue(shoppingCartId, out var events))
             {
-                throw new Exception("ShoppingCart not found");
+                return Task.FromResult<ShoppingCart?>(null);
             }
 
             var shoppingCart = ShoppingCart.Aggregate(events.ToArray());
 
-            return Task.FromResult(shoppingCart);
+            return Task.FromResult<ShoppingCart?>(shoppingCart);
         }
 
         public Task SaveShoppingCart(ShoppingCart shoppingCart)

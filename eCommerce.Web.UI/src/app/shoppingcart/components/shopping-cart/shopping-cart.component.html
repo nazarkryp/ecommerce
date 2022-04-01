@@ -1,0 +1,38 @@
+<ng-container *ngIf="shoppingCart; else empty">
+    <header style="margin-bottom: 3rem;">
+        <h1>Shopping Cart</h1>
+    </header>
+    <main style="border: 1px solid #eaeaea; padding: 2rem; border-radius: 2px;">
+        <div *ngFor="let item of shoppingCart.items" style="padding: .625rem 0;">
+            <div>
+
+            </div>
+            <div style="display: flex; flex-direction: row; place-content: center space-between;">
+                <div>
+                    <span>{{item.product.name}}</span>
+                </div>
+                <div>
+                    <span>{{item.product.price | currency}}</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div style="padding: 2rem; text-align: end;">
+        <span><strong>TOTAL {{shoppingCart.summary.total | currency}}</strong></span>
+    </div>
+    <footer style="border: 0px solid #eaeaea; border-radius: 2px; background-color: rgb(250, 250, 250); display: flex; flex-direction: row; align-items: center; place-content: center space-between; padding: 2rem;">
+        <a [routerLink]="['/']" style="text-decoration: none; font-weight: 400; color: rgb(0, 157, 255);">Continue Shopping</a>
+        <button mat-flat-button color="primary" [routerLink]="['/checkout']">PROCEED TO CHECKOUT</button>
+    </footer>
+</ng-container>
+
+<ng-template #empty>
+    <header>
+        <h2>YOUR CART IS EMPTY</h2>
+    </header>
+    <main>
+        <p>Sorry mate, your shopping cart is empty</p>
+    </main>
+    <br>
+    <button mat-flat-button color="primary" [routerLink]="['/']">CONTINUE SHOPPING</button>
+</ng-template>

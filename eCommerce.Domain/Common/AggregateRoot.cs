@@ -4,20 +4,20 @@ namespace eCommerce.Domain.Common
 {
     public abstract class AggregateRoot
     {
-        private readonly List<IEvent> _events = new List<IEvent>();
+        private readonly List<Event> _events = new List<Event>();
 
-        public IEvent[] Events => _events.ToArray();
+        public Event[] Events => _events.ToArray();
 
-        public void AddEvent(IEvent @event)
+        public void AddEvent(Event @event)
         {
             _events.Add(@event);
         }
 
-        public void Apply(IEvent @event)
+        public void Apply(Event @event)
         {
             When(@event);
         }
 
-        public abstract void When(IEvent @event);
+        public abstract void When(Event @event);
     }
 }

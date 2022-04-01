@@ -7,7 +7,7 @@ namespace eCommerce.Persistence
 {
     public interface IShoppingCartRepository
     {
-        Task<ShoppingCart> GetShoppingCartAsync(Guid shoppingCartId);
+        Task<ShoppingCart?> GetShoppingCartAsync(Guid shoppingCartId);
 
         Task SaveShoppingCart(ShoppingCart shoppingCart);
     }

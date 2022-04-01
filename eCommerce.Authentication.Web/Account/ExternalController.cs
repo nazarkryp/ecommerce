@@ -8,7 +8,7 @@ using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Test;
 
-using IdentityServerHost.Quickstart.UI;
+//using IdentityServerHost.Quickstart.UI;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;

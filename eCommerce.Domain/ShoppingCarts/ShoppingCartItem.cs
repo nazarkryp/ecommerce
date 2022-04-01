@@ -1,15 +1,15 @@
 ﻿using System;
 
+using eCommerce.Domain.Products;
+
 namespace eCommerce.Domain.ShoppingCarts
 {
     public class ShoppingCartItem
     {
         public Guid Id { get; set; }
 
-        public string Name { get; set; }
+        public Product Product { get; set; }
 
-        public decimal Price { get; set; }
-
-        public Guid ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 }

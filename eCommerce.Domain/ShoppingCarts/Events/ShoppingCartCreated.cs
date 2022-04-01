@@ -4,7 +4,7 @@ using eCommerce.Domain.Common;
 
 namespace eCommerce.Domain.ShoppingCarts.Events
 {
-    public class ShoppingCartCreated : IEvent
+    public class ShoppingCartCreated : Event
     {
         public ShoppingCartCreated(Guid id)
         {

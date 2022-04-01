@@ -1,3 +1,56 @@
-<div>
-    <button mat-raised-button (click)="processPayment()">PROCESS PAYMENT</button>
+<div style="display: flex; flex-direction: row; position: relative; box-sizing: border-box; padding-top: 3rem;">
+    <div style="width: 100%; padding-right: 5rem; padding-bottom: 1rem; box-sizing: border-box; overflow-x: hidden;">
+        <div>
+            <div style="width: 100%; background-color: #f8f8f8; padding: 1rem; margin-bottom: 2rem;">
+                <span style="font-size: 1.2rem; font-weight: lighter;">Personal Information</span>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <label style="margin-bottom: .5rem;">Enter First Name *</label>
+                <input type="text" placeholder="First Name"
+                    style="padding: .75rem; margin-bottom: 2rem; border: 1px solid #d8d8d8; border-radius: 5px; outline: none; max-width: 350px;">
+                <label style="margin-bottom: .5rem;">Enter Last Name *</label>
+                <input type="text" placeholder="Last Name"
+                    style="padding: .75rem; margin-bottom: 2rem; border: 1px solid #d8d8d8; border-radius: 5px; outline: none; max-width: 350px;">
+                <label style="margin-bottom: .5rem;">Enter Email Address *</label>
+                <input type="email" placeholder="Email Address"
+                    style="padding: .75rem; margin-bottom: 2rem; border: 1px solid #d8d8d8; border-radius: 5px; outline: none; max-width: 350px;">
+                <button mat-flat-button color="accent" (click)="startPayment()">Proceed to payment</button>
+            </div>
+        </div>
+    </div>
+    <div class="order-summary">
+        <div style="margin: 2rem 2rem 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eaeaea;">
+            <span style="font-size: 1.2em; font-weight: bold;">Your order</span>
+        </div>
+        <ng-container *ngIf="shoppingCart">
+            <div style="margin: 0 2rem 2rem; border-bottom: 1px solid #eaeaea;">
+                <div *ngFor="let item of shoppingCart.items" style="width: 100%; margin-bottom: .75rem;">
+                    <span><strong>{{item.product.name}}</strong></span>
+                    <div style="display: flex; flex-direction: row; justify-content: start; align-items: center;">
+                        <span>{{item.product.price | currency}}</span>
+                        <span style="color: rgba(0, 0, 0, .65); margin-left: 1rem;">x{{item.quantity}}</span>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <div style="margin: 1rem; border-radius: 15px; padding: 2rem 1rem; background-color: #f8f8f8;">
+            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; font-weight: 600;">
+                <span style="font-size: 1.5rem;">TOTAL</span>
+                <span style="font-size: 1.5rem;">$100500</span>
+            </div>
+        </div>
+    </div>
 </div>
+<!--
+<ng-container *ngIf="shoppingCart">
+    <div>
+
+        <div *ngFor="let item of shoppingCart.items">
+            <div style=" margin-bottom: 2rem;">
+                <img [src]="item.product.imageUri" alt="" style="width: 75px;">
+                <span><strong>{{item.product.name}}</strong></span>
+            </div>
+        </div>
+    </div>
+</ng-container> -->

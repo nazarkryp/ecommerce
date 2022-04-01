@@ -18,11 +18,11 @@
 
         public string Currency { get; set; }
 
-        public string ProductName { get; set; }
+        public string[] ProductName { get; set; }
 
-        public string ProductPrice { get; set; }
+        public string[] ProductPrice { get; set; }
 
-        public string ProductCount { get; set; }
+        public string[] ProductCount { get; set; }
 
         public string ClientFirstName { get; set; }
 

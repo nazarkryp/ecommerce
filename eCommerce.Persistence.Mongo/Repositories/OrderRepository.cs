@@ -16,16 +16,25 @@ namespace eCommerce.Persistence.Mongo.Repositories
             return Task.FromResult(_orders.FirstOrDefault(e => e.OrderId == orderId));
         }
 
+        public Task<Order> GetOrderAsync(Guid shoppingCartId)
+        {
+            var order = _orders.LastOrDefault(e => e.ShoppingCartId == shoppingCartId);
+
+            return Task.FromResult(order);
+        }
+
         public Task SaveOrderAsync(Order order)
         {
             var existing = _orders.FirstOrDefault(e => e.OrderId == order.OrderId);
 
             if (existing == null)
             {
-                existing = order;
+                _orders.Add(order);
             }
-
-            existing.State = order.State;
+            else
+            {
+                existing.State = order.State;
+            }
 
             return Task.CompletedTask;
         }

@@ -11,15 +11,29 @@ import {
 import { HomeComponent, PageNotFoundComponent } from 'app/main/components';
 
 const routes: Routes = [
+    // {
+    //     path: '',
+    //     component: HomeComponent,
+    // },
     {
         path: '',
-        component: HomeComponent,
-    },
-    {
-        path: 'products',
         loadChildren: () =>
             import('app/products/products.module').then(
                 (m) => m.ProductsModule
+            ),
+    },
+    {
+        path: 'shopping-cart',
+        loadChildren: () =>
+            import('app/shoppingcart/shopping-cart.module').then(
+                (m) => m.ShoppingCartModule
+            ),
+    },
+    {
+        path: '',
+        loadChildren: () =>
+            import('app/checkout/checkout.module').then(
+                (m) => m.CheckoutModule
             ),
     },
     {

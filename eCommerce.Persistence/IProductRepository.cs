@@ -10,6 +10,6 @@ namespace eCommerce.Persistence
     {
         Task<IEnumerable<Product>> GetProductsAsync(int page, int size);
 
-        Task<Product> GetProductAsync(Guid productId);
+        Task<Product?> GetProductAsync(Guid productId);
     }
 }

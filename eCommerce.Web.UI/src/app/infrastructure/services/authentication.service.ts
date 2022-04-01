@@ -32,7 +32,6 @@ export class AuthenticationService {
     }
 
     public trySignIn(): Observable<any> {
-        console.log('trySignIn');
         return this.signinRedirectCallback().pipe(
             mergeMap((session: any) => {
                 return this.getSession().pipe(

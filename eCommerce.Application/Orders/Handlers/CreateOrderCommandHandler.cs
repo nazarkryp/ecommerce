@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,11 +33,12 @@ namespace eCommerce.Application.Orders.Handlers
                 throw new ShoppingCartNotFoundException(request.ShoppingCartId);
             }
 
-            var order = new Order
+            var order = await _orderRepository.GetOrderAsync(shoppingCard.Id) ?? new Order
             {
                 OrderId = Guid.NewGuid().ToString("N"),
                 ShoppingCartId = request.ShoppingCartId,
-                State = OrderState.Open
+                State = OrderState.Open,
+                Amount = shoppingCard.Items.Sum(e => e.Product.Price)
             };
 
             await _orderRepository.SaveOrderAsync(order);

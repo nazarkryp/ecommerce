@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -6,14 +7,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppMaterialModule, AppRoutingModule } from 'app/main/modules';
 import { AuthenticationInterceptor } from 'app/infrastructure/communication';
+
 import * as components from './components';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
         components.AppComponent,
         components.HeaderComponent,
-        components.HomeComponent,
+        components.HomeComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -21,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         HttpClientModule,
         FormsModule,
         BrowserAnimationsModule,
-        AppMaterialModule
+        AppMaterialModule,
     ],
     providers: [
         {

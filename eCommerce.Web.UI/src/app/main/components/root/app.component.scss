@@ -1,13 +1,13 @@
 .root-container {
     min-height: 100vh;
     position: relative;
-    padding-bottom: 75px;
 }
 
 .root-main {
     display: flex;
     box-sizing: border-box;
     place-content: start center;
+    padding: 3rem 0;
 }
 
 .root-footer {
@@ -18,8 +18,15 @@
     flex-direction: row;
     place-content: center center;
     align-items: center;
+    color: white;
 }
 
 .root-footer>.container {
     padding: 2rem 0;
+}
+
+.root-footer a {
+    text-decoration: none;
+    color: white;
+    font-weight: normal;
 }

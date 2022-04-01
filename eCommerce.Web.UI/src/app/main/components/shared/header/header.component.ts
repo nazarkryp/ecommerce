@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { AuthenticationService, CurrentUser } from 'app/infrastructure/services';
+import {
+    AuthenticationService,
+    CurrentUser,
+    ECommerceClient,
+} from 'app/infrastructure/services';
+import { ShoppingCartService } from 'app/shared/services';
 
 @Component({
     selector: 'app-nav-menu',
@@ -10,7 +16,14 @@ import { AuthenticationService, CurrentUser } from 'app/infrastructure/services'
 export class HeaderComponent implements OnInit {
     isExpanded = false;
 
-    constructor(private authenticationService: AuthenticationService) {}
+    public shoppingCart: any = null!;
+
+    constructor(
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private ecommerceClient: ECommerceClient,
+        private shoppingCartService: ShoppingCartService
+    ) {}
 
     public currentUser: CurrentUser = null!;
 
@@ -22,8 +35,21 @@ export class HeaderComponent implements OnInit {
         this.authenticationService.signOut();
     }
 
+    public checkout() {
+        this.ecommerceClient
+            .createOrder(this.shoppingCart.id)
+            .subscribe((orderResponse) => {
+                console.log(orderResponse);
+                this.router.navigate([orderResponse.orderId, 'checkout']);
+            });
+    }
+
     public ngOnInit(): void {
-        this.authenticationService.currentUser.subscribe(currentUser => {
+        this.shoppingCartService.ShoppingCart.subscribe((shoppingCart) => {
+            this.shoppingCart = shoppingCart;
+        });
+
+        this.authenticationService.currentUser.subscribe((currentUser) => {
             this.currentUser = currentUser;
         });
     }

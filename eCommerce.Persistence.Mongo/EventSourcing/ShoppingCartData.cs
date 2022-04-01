@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace eCommerce.Domain.Common
+namespace eCommerce.Persistence.Mongo.EventSourcing
 {
-    public interface IEvent
+    public class ShoppingCartData
     {
     }
 }

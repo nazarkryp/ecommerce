@@ -9,5 +9,7 @@ namespace eCommerce.Domain.Products
         public string Name { get; set; }
 
         public decimal Price { get; set; }
+
+        public string ImageUri { get; set; }
     }
 }

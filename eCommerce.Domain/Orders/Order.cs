@@ -9,6 +9,8 @@ namespace eCommerce.Domain.Orders
         public Guid ShoppingCartId { get; set; }
 
         public OrderState State { get; set; }
+
+        public decimal Amount { get; set; }
     }
 
     public enum OrderState : byte

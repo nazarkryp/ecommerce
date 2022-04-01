@@ -16,13 +16,13 @@ namespace eCommerce.Application.Infrastructure.Mapping
             };
         }
 
-        private static eCommerce.Request.Dtos.ShoppingCarts.ShoppingCartItem[] Map(this IReadOnlyCollection<ShoppingCartItem> items)
+        private static eCommerce.Request.Dtos.ShoppingCarts.ShoppingCartItemResponse[] Map(this IReadOnlyCollection<ShoppingCartItem> items)
         {
-            return items.Select(e => new eCommerce.Request.Dtos.ShoppingCarts.ShoppingCartItem
+            return items.Select(e => new eCommerce.Request.Dtos.ShoppingCarts.ShoppingCartItemResponse
             {
                 Id = e.Id,
-                Name = e.Name,
-                Price = e.Price
+                Product = e.Product.Map(),
+                Quantity = e.Quantity
             }).ToArray();
         }
     }

@@ -3,6 +3,7 @@
 }
 
 .nav-top {
+    font-size: 0.8em;
     background-color: black;
     display: flex;
     flex-direction: row;
@@ -32,7 +33,7 @@
 .nav-menu {
     background-color: white;
     border-bottom: 1px solid #eaeaea;
-    padding: 1.5rem 0;
+    padding: 1.25rem 0;
 }
 
 .menu-items-wrapper {
@@ -72,10 +73,10 @@
 
 
 .navmenu-brand {
-    font-size: 2em;
+    font-size: 1.5em;
     text-decoration: none;
     color: inherit;
-    font-weight: 800;
+    font-weight: 600;
     margin-right: 3rem;
     width: 100%;
 }

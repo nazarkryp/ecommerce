@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using eCommerce.Domain.Common;
+using eCommerce.Domain.Products;
 using eCommerce.Domain.ShoppingCarts.Events;
 
 namespace eCommerce.Domain.ShoppingCarts
@@ -10,7 +12,7 @@ namespace eCommerce.Domain.ShoppingCarts
     {
         private readonly List<ShoppingCartItem> _items = new List<ShoppingCartItem>();
 
-        private ShoppingCart()
+        protected ShoppingCart()
         {
         }
 
@@ -18,23 +20,53 @@ namespace eCommerce.Domain.ShoppingCarts
 
         public IReadOnlyCollection<ShoppingCartItem> Items => _items.AsReadOnly();
 
-        public void AddItem(ShoppingCartItem item)
+        public void AddItem(Product product)
         {
-            _items.Add(item);
+            var item = _items.FirstOrDefault(e => e.Product.Id == product.Id);
 
-            AddEvent(new ItemAddedEvent
+            if (item == null)
             {
-                Item = item
-            });
+                item = new ShoppingCartItem
+                {
+                    Id = Guid.NewGuid(),
+                    Product = product,
+                    Quantity = 1
+                };
+
+                AddEvent(new ItemAddedEvent
+                {
+                    Id = item.Id,
+                    Product = item.Product,
+                    Quantity = item.Quantity
+                });
+            }
+            else
+            {
+                item.Quantity++;
+                _items.Add(item);
+
+                AddEvent(new ItemUpdatedEvent
+                {
+                    Id = item.Id,
+                    Quantity = item.Quantity
+                });
+            }
         }
 
-        public void RemoveItem(ShoppingCartItem item)
+        public void RemoveItem(Guid itemId)
         {
+            var item = _items.FirstOrDefault(e => e.Id == itemId);
+
+            if (item == null)
+            {
+                throw new Exception($"ShoppingCartItem '{itemId}' not found");
+            }
+
             _items.Remove(item);
 
-            AddEvent(new ItemRemoved
+            AddEvent(new ItemRemovedEvent
             {
-                Item = item
+                Id = item.Id
             });
         }
 
@@ -50,7 +82,7 @@ namespace eCommerce.Domain.ShoppingCarts
             return shoppingCart;
         }
 
-        public static ShoppingCart Aggregate(IEvent[] events)
+        public static ShoppingCart Aggregate(Event[] events)
         {
             var shoppingCart = new ShoppingCart();
 
@@ -62,7 +94,7 @@ namespace eCommerce.Domain.ShoppingCarts
             return shoppingCart;
         }
 
-        public override void When(IEvent @event)
+        public override void When(Event @event)
         {
             if (@event is ShoppingCartCreated created)
             {
@@ -70,11 +102,22 @@ namespace eCommerce.Domain.ShoppingCarts
             }
             else if (@event is ItemAddedEvent added)
             {
-                _items.Add(added.Item);
+                _items.Add(new ShoppingCartItem
+                {
+                    Id = added.Id,
+                    Product = added.Product,
+                    Quantity = added.Quantity
+                });
             }
-            else if (@event is ItemRemoved removed)
+            else if (@event is ItemUpdatedEvent updated)
             {
-                _items.Remove(removed.Item);
+                var item = _items.First(e => e.Id == updated.Id);
+                item.Quantity = updated.Quantity;
+            }
+            else if (@event is ItemRemovedEvent removed)
+            {
+                var item = _items.FirstOrDefault(e => e.Id == removed.Id);
+                _items.Remove(item);
             }
         }
     }

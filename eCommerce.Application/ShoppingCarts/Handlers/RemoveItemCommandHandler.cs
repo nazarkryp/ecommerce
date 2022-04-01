@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
+using eCommerce.Application.Exceptions;
 using eCommerce.Application.ShoppingCarts.Commands;
 using eCommerce.Persistence;
 
@@ -22,14 +21,13 @@ namespace eCommerce.Application.ShoppingCarts.Handlers
         public async Task<Unit> Handle(RemoveItemCommand request, CancellationToken cancellationToken)
         {
             var shoppingCart = await _shoppingCartRepository.GetShoppingCartAsync(request.ShoppingCartId);
-            var item = shoppingCart.Items.FirstOrDefault(e => e.Id == request.ItemId);
 
-            if (item == null)
+            if (shoppingCart == null)
             {
-                throw new Exception($"ShoppingCartItem '{request.ItemId}' not found");
+                throw new ShoppingCartNotFoundException(request.ShoppingCartId);
             }
 
-            shoppingCart.RemoveItem(item);
+            shoppingCart.RemoveItem(request.ItemId);
 
             await _shoppingCartRepository.SaveShoppingCart(shoppingCart);
 

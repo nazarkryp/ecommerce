@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from 'app/infrastructure/services';
+import { ShoppingCartService } from 'app/shared/services';
 
 @Component({
     selector: 'app-root',
@@ -8,11 +9,13 @@ import { AuthenticationService } from 'app/infrastructure/services';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-    title = 'app';
-
-    constructor(private authenticationService: AuthenticationService) {}
+    constructor(
+        private authenticationService: AuthenticationService,
+        private shoppingCartService: ShoppingCartService
+    ) {}
 
     public ngOnInit(): void {
         this.authenticationService.trySignIn().subscribe((session) => {});
+        this.shoppingCartService.getShoppingCart().subscribe();
     }
 }

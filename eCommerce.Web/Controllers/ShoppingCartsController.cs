@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using eCommerce.Application.ShoppingCarts.Commands;
 using eCommerce.Application.ShoppingCarts.Queries;
+using eCommerce.Request.Dtos.ShoppingCarts;
 
 using MediatR;
 
@@ -12,11 +13,11 @@ namespace eCommerce.Web.Controllers;
 
 [ApiController]
 [ApiVersion("1.0"), Route("v{version:apiVersion}/[controller]")]
-public class ShoppingCartController : ControllerBase
+public class ShoppingCartsController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public ShoppingCartController(ISender sender)
+    public ShoppingCartsController(ISender sender)
     {
         _sender = sender;
     }
@@ -42,9 +43,9 @@ public class ShoppingCartController : ControllerBase
     }
 
     [HttpPost("{shoppingCartId}/items")]
-    public async Task<IActionResult> AddShoppingCartItemAsync(Guid shoppingCartId, object request)
+    public async Task<IActionResult> AddShoppingCartItemAsync(Guid shoppingCartId, AddItemRequest request)
     {
-        var command = AddItemCommand.Create(shoppingCartId, Guid.NewGuid());
+        var command = AddItemCommand.Create(shoppingCartId, request.ProductId);
 
         await _sender.Send(command);
 

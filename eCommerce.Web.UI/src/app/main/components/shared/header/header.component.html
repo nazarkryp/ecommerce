@@ -16,29 +16,20 @@
     <nav class="nav-menu container-wrapper">
         <div class="container flex-row">
             <a class="navmenu-brand" [routerLink]="['/']">eCommerce</a>
-            <ul class="menu-items center">
+            <!-- <ul class="menu-items center">
                 <li>
-                    <a class="nav-link" [routerLink]="['/products']">Jeans</a>
+                    <a class="nav-link" [routerLink]="['/products']">Computer</a>
                 </li>
-                <li>
-                    <a class="nav-link" [routerLink]="['/products']">Skirts</a>
-                </li>
-                <li>
-                    <a class="nav-link" [routerLink]="['/products']">Hoodie</a>
-                </li>
-                <li>
-                    <a class="nav-link" [routerLink]="['/products']">Чулки XXX</a>
-                </li>
-                <li>
-                    <a class="nav-link" [routerLink]="['/products']">Other</a>
-                </li>
-            </ul>
+            </ul> -->
             <div class="menu-items end">
-                <ng-container *ngIf="currentUser">
+                <button mat-button (click)="checkout()" *ngIf="shoppingCart">
+                    <mat-icon>person</mat-icon>
+                </button>
+                <button mat-button [routerLink]="['/shopping-cart']" *ngIf="shoppingCart">
+                    <mat-icon>shopping_cart</mat-icon> <b>+{{shoppingCart.items.length}}</b>
+                </button>
+                <!-- <ng-container *ngIf="currentUser">
                     <div style="display: flex; flex-direction: row; align-items: center; margin-left: 1rem;">
-                        <!-- <button mat-raised-button color="primary" type="button" (click)="signOut()">
-                            Sign Out
-                        </button> -->
                         <button mat-button (click)="signOut()">
                             <mat-icon>shopping_cart</mat-icon> <b>+7</b>
                         </button>
@@ -48,41 +39,11 @@
                     <button mat-raised-button color="primary" type="button" (click)="signIn()">Create
                         Account</button>
                     <button mat-button color="primary" type="button" (click)="signIn()">Sign In</button>
-                </ng-container>
+                </ng-container> -->
             </div>
-            <!-- <div class="menu-items-wrapper">
-                <ul class="menu-items start">
-                    <li>
-                        <a class="nav-link" [routerLink]="['/products']">Jeans</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" [routerLink]="['/products']">Skirts</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" [routerLink]="['/products']">Hoodie</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" [routerLink]="['/products']">Other</a>
-                    </li>
-                </ul>
-                <div class="menu-items end">
-                    <ng-container *ngIf="currentUser">
-                        <div style="display: flex; flex-direction: row; align-items: center; margin-left: 1rem;">
-                            <button mat-raised-button color="primary" type="button" (click)="signOut()">
-                                Sign Out
-                            </button>
-                        </div>
-                    </ng-container>
-                    <ng-container *ngIf="!currentUser">
-                        <button mat-raised-button color="primary" type="button" (click)="signIn()">Create
-                            Account</button>
-                        <button mat-button color="primary" type="button" (click)="signIn()">Sign In</button>
-                    </ng-container>
-                </div>
-            </div> -->
         </div>
     </nav>
-    <nav class="nav-submenu container-wrapper">
+    <!-- <nav class="nav-submenu container-wrapper">
         <div class="container">
             <ul class="nav-menu-items">
                 <li>
@@ -96,5 +57,5 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
 </header>

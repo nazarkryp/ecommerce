@@ -14,32 +14,38 @@ namespace eCommerce.Persistence.Mongo.Repositories
             new Product
             {
                 Id = Guid.NewGuid(),
-                Name = "Apple iPhone 12 Pro",
-                Price = 1200.99M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Macbook Pro 2019",
-                Price = 2599.69M
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
                 Name = "NZXT Kraken x63",
-                Price = 250.69M
+                Price = 250.69M,
+                ImageUri = "https://content.rozetka.com.ua/goods/images/big/21500247.jpg"
             },
             new Product
             {
                 Id = Guid.NewGuid(),
                 Name = "NVidia GeForce RTX 3070",
-                Price = 1500.69M
+                Price = 1500.69M,
+                ImageUri = "https://img.etasawaq.com/2021/07/3070nonoc.jpg"
             },
             new Product
             {
                 Id = Guid.NewGuid(),
                 Name = "Razer Blade 14",
-                Price = 2200.69M
+                Price = 2200.69M,
+                ImageUri = "https://www.pcworld.com/wp-content/uploads/2021/09/razer-blade-14-primary-100900019-orig.jpg?quality=50&strip=all&w=1024"
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Apple iPhone 12 Pro",
+                Price = 1200.99M,
+                ImageUri = "https://loopnew.com/wp-content/uploads/2020/11/apple-iphone-12-pro-2.jpg"
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Macbook Pro 2019",
+                Price = 2599.69M,
+                ImageUri = "https://www.notebookcheck-ru.com/uploads/tx_nbc2/Bildschirmfoto_2019-10-01_um_12.20.11.png"
+
             }
         };
 
@@ -48,9 +54,11 @@ namespace eCommerce.Persistence.Mongo.Repositories
             return Task.FromResult(Products.AsEnumerable());
         }
 
-        public Task<Product> GetProductAsync(Guid productId)
+        public Task<Product?> GetProductAsync(Guid productId)
         {
-            throw new NotImplementedException();
+            var product = Products.FirstOrDefault(e => e.Id == productId);
+
+            return Task.FromResult<Product?>(product);
         }
     }
 }
